@@ -10,27 +10,26 @@ import time
 import csv
 import random
 
-# Update the path to your CSV file containing numbers and messages
+
 csv_file_path = 'contacts_messages.csv'
 
-# Set your message
-message_to_send = 'Hello'  # Replace 'Hello' with your desired message
 
-# Create driver
+message_to_send = 'Hello'  
+
+
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
-# Open browser with default link
+
 link = 'https://web.whatsapp.com'
 driver.get(link)
 
-# Allow time for manual login and scanning QR code
 input("Press Enter after scanning QR code and loading WhatsApp Web...")
 
-# Read data from the modified CSV file
+
 with open(csv_file_path, 'r', newline='', encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile)
     for row in reader:
-        num = row[1]  # Extracting the phone number from the CSV file
+        num = row[1] 
         link = f'https://web.whatsapp.com/send/?phone={num}'
         driver.get(link)
 
@@ -40,14 +39,14 @@ with open(csv_file_path, 'r', newline='', encoding='utf-8') as csvfile:
             )
             input_box.send_keys(message_to_send + Keys.ENTER)
 
-            # Wait for the message to be sent (adjust this wait time accordingly)
-            time.sleep(random.uniform(5, 10))  # Random sleep between 5 to 10 seconds
+           
+            time.sleep(random.uniform(5, 10))  
         except TimeoutException as e:
             print(f"Timeout error: {str(e)}")
-            # Handle the timeout exception
+            
         except Exception as e:
             print(f"An error occurred: {str(e)}")
-            # Handle the error or wait for the page to stabilize before proceeding
+           
 
 # Quit the driver
 driver.quit()
