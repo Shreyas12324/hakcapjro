@@ -4,4 +4,4 @@ optica hackathon
 <br>
 This is about whatsapp bulk messaging
 <br>
-Author-Shreyas Chaudhary
+Author-Shreyas Chaudhary(jiit)
