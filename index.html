@@ -60,64 +60,17 @@
   <div id="container">
     <h1>WhatsApp Bulk Messaging</h1>
     
-    <form id="upload-form">
-      <label for="file-input">Upload CSV file:</label>
-      <input type="file" id="file-input" accept=".csv">
-      <button type="submit">Extract Phone Numbers</button>
-    </form>
+    
     
     <div id="phone-numbers"></div>
     
-    <form id="message-form">
-      <label for="message">Message:</label>
+    <form id="message-form" action="send" method="get">
+      <label for="message">Messages: (You can enter multiple messages , just separate them by ; ) </label>
       <textarea id="message" name="message" rows="4" cols="50"></textarea>
       <button type="submit">Send Message</button>
     </form>
   </div>
 
-  <script>
-     document.getElementById('upload-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const file = document.getElementById('file-input').files[0];
-      
-      if (file) {
-        const reader = new FileReader();
-        
-        reader.onload = function(event) {
-          const content = event.target.result;
-          const lines = content.split('\n');
-          let phoneNumbers = '';
-          
-          lines.forEach(function(line) {
-            const values = line.split(',');
-            if (values.length >= 2) {
-              phoneNumbers += values[1] + '<br>';
-            }
-          });
-          
-          document.getElementById('phone-numbers').innerHTML = phoneNumbers;
-        }
- reader.readAsText(file);
-      } else {
-        document.getElementById('phone-numbers').innerHTML = 'No file selected';
-      }
-    });
-    
-    document.getElementById('message-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const message = document.getElementById('message').value;
-      const phoneNumbers = document.getElementById('phone-numbers').innerHTML.split('<br>');
-      
-      // Send messages to phone numbers here (implementation needed)
-      console.log('Message:', message);
-      console.log('Phone Numbers:', phoneNumbers);
-      
-      // For demonstration purposes, you can simulate sending messages by logging the message and phone numbers
-      // Replace this with your actual sending logic using WhatsApp API or other methods
-      
-      alert('Messages sent successfully!'); // Replace this with your sending confirmation or feedback to the user
-    });
 
-  </script>
 </body>
-</html>
+</html> 

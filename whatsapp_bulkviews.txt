@@ -1,0 +1,31 @@
+# whatsapp_bulk/views.py
+from django.shortcuts import render
+from django.http import HttpResponse
+import csv
+
+def index(request):
+    return render(request, 'index.html')
+
+def send_messages(request):
+    if request.method == 'POST' and 'file' in request.FILES and 'message' in request.POST:
+        file = request.FILES['file']
+        message = request.POST['message']
+
+        # Process the uploaded CSV file
+        phone_numbers = []
+        if file.name.endswith('.csv'):
+            decoded_file = file.read().decode('utf-8').splitlines()
+            csv_reader = csv.reader(decoded_file)
+            for row in csv_reader:
+                if len(row) >= 2:
+                    phone_numbers.append(row[1])
+
+        #kushal aur shreyas ka  python code done on kushal's pc.
+        
+       
+        print("Phone Numbers:", phone_numbers)
+        print("Message:", message)
+
+        return HttpResponse('Messages sent successfully!') 
+    else:
+        return HttpResponse('Error: Invalid request')
